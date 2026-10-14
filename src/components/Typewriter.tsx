@@ -1,33 +1,66 @@
 import { useEffect, useState } from 'react'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 
-type Props = { text: string; speed?: number; startDelay?: number }
+type Props = {
+  /** Frases que são digitadas, apagadas e trocadas em sequência. */
+  phrases: string[]
+  /** Texto fixo antes das frases, ex.: "// " */
+  prefix?: string
+  /** O que leitores de tela recebem (as frases mudam, então damos um resumo fixo). */
+  label: string
+}
 
-/** Escreve o texto letra por letra. Leitores de tela recebem o texto inteiro de uma vez. */
-export function Typewriter({ text, speed = 38, startDelay = 250 }: Props) {
+const TYPE_MS = 45
+const DELETE_MS = 22
+const HOLD_MS = 1800
+
+/** Digita uma frase, espera, apaga e passa para a próxima, em loop. */
+export function Typewriter({ phrases, prefix = '', label }: Props) {
   const reduced = useReducedMotion()
-  const [count, setCount] = useState(0)
+  const [text, setText] = useState('')
 
   useEffect(() => {
-    if (reduced) return
-    let typed = 0
-    let timer = window.setTimeout(function tick() {
-      typed += 1
-      setCount(typed)
-      if (typed < text.length) timer = window.setTimeout(tick, speed)
-    }, startDelay)
-    return () => window.clearTimeout(timer)
-  }, [text, speed, startDelay, reduced])
+    if (reduced || phrases.length === 0) return
+    let phrase = 0
+    let chars = 0
+    let deleting = false
+    let timer = 0
 
-  const shown = reduced ? text.length : count
-  const typing = shown < text.length
+    const step = () => {
+      const current = phrases[phrase]
+      if (!deleting) {
+        chars += 1
+        setText(current.slice(0, chars))
+        if (chars === current.length) {
+          deleting = true
+          timer = window.setTimeout(step, HOLD_MS)
+          return
+        }
+        timer = window.setTimeout(step, TYPE_MS)
+      } else {
+        chars -= 1
+        setText(current.slice(0, chars))
+        if (chars === 0) {
+          deleting = false
+          phrase = (phrase + 1) % phrases.length
+        }
+        timer = window.setTimeout(step, chars === 0 ? 320 : DELETE_MS)
+      }
+    }
+
+    timer = window.setTimeout(step, 400)
+    return () => window.clearTimeout(timer)
+  }, [phrases, reduced])
+
+  const shown = reduced ? phrases[0] : text
 
   return (
     <>
-      <span className="visually-hidden">{text}</span>
+      <span className="visually-hidden">{label}</span>
       <span aria-hidden="true">
-        {text.slice(0, shown)}
-        {typing && <span className="type-caret" />}
+        {prefix}
+        {shown}
+        <span className="type-caret" />
       </span>
     </>
   )

@@ -38,6 +38,11 @@
   50% { opacity: 0.25; }
 }
 
+/* O nome tem animação própria (letra por letra) */
+.hero__main > .hero__title {
+  animation: none;
+}
+
 /* O painel entra logo depois do texto */
 .hero > .panel {
   animation: fade-up 700ms var(--ease-out) 380ms both;

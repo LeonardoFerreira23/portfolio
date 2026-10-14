@@ -113,7 +113,101 @@
   animation: blink 1s steps(1) infinite;
 }
 
+
+/* Nome no topo: cada letra sobe no lugar */
+.split__word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.split__char {
+  display: inline-block;
+  animation: char-rise 760ms var(--ease-out) both;
+  animation-delay: var(--d, 0ms);
+}
+
+@keyframes char-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.45em) rotate(4deg);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+/* Barra fina de progresso de leitura no topo */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-hover));
+  box-shadow: 0 0 12px rgba(224, 168, 79, 0.6);
+  transform: scaleX(var(--scroll, 0));
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* Inclinação 3D dos cards (valores vêm do mouse) */
+.tilt {
+  transform-style: preserve-3d;
+}
+
+/* Borda de luz que gira em volta do painel perfil.ts */
+@property --angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.glow-border {
+  position: relative;
+}
+
+.glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  background: conic-gradient(from var(--angle), transparent 0 62%, rgba(224, 168, 79, 0.95) 80%, transparent 96%);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: spin-angle 7s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes spin-angle {
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* Chips de tecnologia reagem ao mouse */
+.chip {
+  transition:
+    border-color var(--duration),
+    color var(--duration),
+    transform 200ms var(--ease-out);
+}
+
+.chip:hover {
+  border-color: rgba(224, 168, 79, 0.5);
+  color: var(--color-text);
+  transform: translateY(-2px);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .split__char,
+  .glow-border::after,
   .page-enter,
   .stagger > *,
   .type-caret {

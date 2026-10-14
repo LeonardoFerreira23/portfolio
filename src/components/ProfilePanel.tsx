@@ -22,7 +22,7 @@ export function ProfilePanel() {
   }, [])
 
   return (
-    <aside className="panel" aria-label="Resumo do perfil">
+    <aside className="panel glow-border" aria-label="Resumo do perfil">
       <div className="panel__bar mono">
         <span>perfil.ts</span>
         {profile.available && (

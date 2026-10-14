@@ -6,6 +6,7 @@ import { CommandPalette } from '../components/CommandPalette'
 import { useHotkey } from '../hooks/useHotkey'
 import { useRevealOnScroll } from '../hooks/useRevealOnScroll'
 import { usePointerEffects } from '../hooks/usePointerEffects'
+import { useScrollProgress } from '../hooks/useScrollProgress'
 import './AppLayout.css'
 
 export function AppLayout() {
@@ -28,11 +29,13 @@ export function AppLayout() {
 
   useRevealOnScroll(mainRef, pathname)
   usePointerEffects()
+  useScrollProgress()
 
   return (
     <div className="layout">
       <div className="backdrop" aria-hidden="true" />
       <div className="cursor-glow" aria-hidden="true" />
+      <div className="scroll-progress" aria-hidden="true" />
       <a href="#conteudo" className="skip-link">
         Pular para o conteúdo
       </a>

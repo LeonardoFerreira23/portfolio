@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { NavLink } from 'react-router'
+import { useLayoutEffect, useRef, useState } from 'react'
+import { NavLink, useLocation } from 'react-router'
 import { contact, pages, profile } from '../data/content'
 import './Sidebar.css'
 
@@ -13,6 +13,23 @@ export function Sidebar({ onOpenPalette }: Props) {
   const closeMenu = () => setMenuOpen(false)
 
   const socials = contact.links.filter((l) => socialLabels.includes(l.label))
+
+  // Indicador que desliza até o item ativo do menu.
+  const { pathname } = useLocation()
+  const listRef = useRef<HTMLUListElement>(null)
+  const indicatorRef = useRef<HTMLSpanElement>(null)
+  useLayoutEffect(() => {
+    const active = listRef.current?.querySelector<HTMLElement>('.sidebar__link.active')
+    const indicator = indicatorRef.current
+    if (!indicator) return
+    if (!active) {
+      indicator.style.opacity = '0'
+      return
+    }
+    indicator.style.opacity = '1'
+    indicator.style.transform = `translateY(${active.offsetTop}px)`
+    indicator.style.height = `${active.offsetHeight}px`
+  }, [pathname, menuOpen])
 
   return (
     <aside className="sidebar" data-open={menuOpen}>
@@ -47,7 +64,8 @@ export function Sidebar({ onOpenPalette }: Props) {
         )}
 
         <nav aria-label="Páginas" className="sidebar__nav">
-          <ul>
+          <span ref={indicatorRef} className="sidebar__indicator" aria-hidden="true" />
+          <ul ref={listRef}>
             {pages.map((page) => (
               <li key={page.path}>
                 <NavLink to={page.path} end={page.path === '/'} className="sidebar__link" onClick={closeMenu}>

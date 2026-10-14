@@ -91,7 +91,29 @@
   background: var(--color-ok);
 }
 
+.sidebar__nav {
+  position: relative;
+}
+
+/* Fundo do item ativo: um só elemento que desliza entre os itens */
+.sidebar__indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background: var(--color-surface-2);
+  box-shadow: inset 2px 0 0 var(--color-accent);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 420ms var(--ease-out),
+    height 420ms var(--ease-out),
+    opacity 200ms;
+}
+
 .sidebar__nav ul {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -127,10 +149,12 @@
 }
 
 .sidebar__link.active {
-  background: var(--color-surface-2);
-  box-shadow: inset 2px 0 0 var(--color-accent);
   color: var(--color-text);
   font-weight: 500;
+}
+
+.sidebar__link.active:hover {
+  background: transparent;
 }
 
 .sidebar__index {
@@ -195,6 +219,12 @@
 }
 
 /* Celular / tablet: vira barra no topo com menu que abre por baixo */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar__indicator {
+    transition: none;
+  }
+}
+
 @media (max-width: 900px) {
   .sidebar {
     z-index: 20;

@@ -21,18 +21,26 @@ export type ContactLink = { label: string; text: string; href: string }
 export const profile = {
   name: 'Leonardo Ferreira',
   initials: 'LF',
-  role: 'Engenheiro de Software',
+  role: 'Desenvolvedor Full Stack',
   location: 'Santa Rita do Sapucaí, MG · UTC−3',
   available: true,
-  kicker: '// engenharia de software · backend',
+  /** Frases que o topo do site digita e apaga em sequência (depois de "// "). */
+  taglines: [
+    'construo APIs REST',
+    'crio interfaces em React',
+    'modelo bancos de dados',
+    'automatizo deploys com CI/CD',
+    'entrego do banco à interface',
+  ],
   statement:
-    'Engenheiro de software com foco em backend. 7 anos de experiência no mercado, transformando requisitos em sistemas que funcionam — de APIs REST a pipelines de CI/CD.',
-  chips: ['Java · Spring Boot', 'Python · FastAPI', 'PostgreSQL', 'Docker · Jenkins CI/CD'],
+    'Desenvolvedor full stack com 7 anos de experiência no mercado. Construo produtos de ponta a ponta — interfaces em React e TypeScript, APIs em Java e Python, banco de dados e entrega automatizada.',
+  chips: ['React · TypeScript', 'Next.js', 'Java · Spring Boot', 'Python · FastAPI', 'PostgreSQL', 'Docker · CI/CD'],
   /** Painel ao lado do hero (perfil.ts). A hora local é calculada ao vivo pelo componente. */
   timeZone: 'America/Sao_Paulo',
   facts: [
-    { label: 'foco', value: 'Backend · APIs REST' },
-    { label: 'stack', value: 'Java, Python, PostgreSQL, Docker' },
+    { label: 'foco', value: 'Full stack · Web e APIs' },
+    { label: 'front', value: 'React, Next.js, TypeScript' },
+    { label: 'back', value: 'Java, Python, PostgreSQL' },
     { label: 'experiência', value: '7 anos no mercado' },
     { label: 'formação', value: 'Eng. de Software · Inatel (2027)' },
     { label: 'idiomas', value: 'Português, Inglês avançado' },
@@ -103,6 +111,7 @@ export const projects: Project[] = [
 ]
 
 export const areas: Area[] = [
+  { title: 'Front-end', body: 'Interfaces web responsivas, componentes reutilizáveis e testes.', keywords: 'React · Next.js · TypeScript · Vitest' },
   { title: 'Backend e APIs', body: 'Serviços REST, modelagem de dados e integração.', keywords: 'Spring Boot · FastAPI · PostgreSQL' },
   { title: 'Entrega e infraestrutura', body: 'Containers e pipelines de integração contínua.', keywords: 'Docker · Jenkins' },
   { title: 'Requisitos e cliente', body: 'Levantamento, alinhamento de expectativas e suporte técnico.', keywords: 'Escopo · Comunicação' },
@@ -112,7 +121,7 @@ export const timeline: TimelineItem[] = [
   {
     period: '2019 — 2026',
     title: 'Analista · Behive Tecnologia',
-    body: 'Levantamento de requisitos com clientes, alinhamento de expectativas e desenvolvimento backend.',
+    body: 'Levantamento de requisitos com clientes, alinhamento de expectativas e desenvolvimento de software.',
   },
   { period: 'até dez 2027', title: 'Engenharia de Software · Inatel', body: 'Último ano da graduação.' },
   { period: 'concluído', title: 'Técnico em Eletrônica · ETE FMC', body: 'Ênfase em Automação Industrial.' },

@@ -19,7 +19,7 @@ type CardProps = { project: Project; heading?: Heading; index?: number }
 
 export function ProjectCard({ project, heading: Title = 'h3', index = 0 }: CardProps) {
   return (
-    <article className="project spotlight" data-reveal style={{ '--reveal-delay': `${(index % 3) * 90}ms` } as CSSProperties}>
+    <article className="project spotlight tilt" data-reveal style={{ '--reveal-delay': `${(index % 3) * 90}ms` } as CSSProperties}>
       <div className="project__meta mono">
         <span className="project__kind">{project.kind}</span>
         <span>{project.status}</span>

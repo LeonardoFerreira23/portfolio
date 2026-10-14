@@ -15,7 +15,7 @@ export function Footer() {
         padding: '24px var(--page-gutter)',
         borderTop: '1px solid var(--color-line)',
         fontSize: 12,
-        color: '#8a9099',
+        color: 'var(--color-text-muted)',
       }}
     >
       <span>

@@ -26,7 +26,7 @@ export function Areas() {
                 flexDirection: 'column',
                 gap: 10,
                 padding: 28,
-                background: 'var(--color-bg)',
+                background: 'var(--color-surface)',
                 '--reveal-delay': `${i * 90}ms`,
               } as CSSProperties
             }

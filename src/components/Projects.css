@@ -9,13 +9,13 @@
   flex-direction: column;
   gap: 18px;
   padding: 28px;
-  background: var(--color-surface);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 40%), var(--color-surface);
   border: 1px solid var(--color-line);
   transition: border-color var(--duration);
 }
 
 .project:hover {
-  border-color: rgba(224, 168, 79, 0.35);
+  border-color: rgba(var(--accent-rgb), 0.35);
 }
 
 .project[data-reveal].is-visible {
@@ -56,7 +56,7 @@
 
 .project__summary {
   font-size: 15px;
-  color: #b4b8bf;
+  color: var(--color-text-soft);
 }
 
 .project__flow {
@@ -68,7 +68,7 @@
   padding: 12px;
   list-style: none;
   background: var(--color-bg-sunken);
-  border: 1px dashed #2e3138;
+  border: 1px dashed var(--color-line-mid);
   font-size: 12px;
   color: var(--color-text-soft);
 }

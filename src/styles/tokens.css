@@ -1,19 +1,29 @@
 /* Design tokens — a identidade visual inteira sai daqui. */
 :root {
-  --color-bg: #0c0d0f;
-  --color-bg-sunken: #0e0f12;
-  --color-surface: #121418;
-  --color-surface-2: #1b1e23;
-  --color-line: #23262c;
-  --color-line-strong: #3a3e46;
+  /* Azul-marinho. O fundo da página é um gradiente (ver --page-gradient);
+     sidebar, cards e painéis usam as cores sólidas abaixo. */
+  --color-bg: #060b16;
+  --color-bg-sunken: #0a1222;
+  --color-surface: #0f1a2e;
+  --color-surface-2: #15223b;
+  --color-line: #1c2a45;
+  --color-line-mid: #24334f;
+  --color-line-strong: #2d3f63;
 
-  --color-text: #e6e7ea;
-  --color-text-soft: #c9ccd2;
-  --color-text-muted: #9aa0a8;
+  --page-gradient:
+    radial-gradient(1100px 680px at 88% -8%, rgba(79, 140, 255, 0.16), transparent 62%),
+    radial-gradient(900px 620px at -8% 108%, rgba(56, 189, 248, 0.08), transparent 60%),
+    linear-gradient(160deg, #0b1733 0%, #070d1c 55%, #050912 100%);
 
-  --color-accent: #e0a84f;
-  --color-accent-hover: #f2c57d;
-  --color-on-accent: #14110b;
+  --color-text: #e8eef9;
+  --color-text-soft: #c2cde2;
+  --color-text-muted: #8a9abb;
+
+  /* Destaque: azul. --accent-rgb é o mesmo azul em R, G, B (para brilhos com transparência) */
+  --color-accent: #4f8cff;
+  --color-accent-hover: #7aa9ff;
+  --accent-rgb: 79, 140, 255;
+  --color-on-accent: #061024;
 
   --color-ok: #5fbf8a;
   --color-ok-text: #7fd1a3;

@@ -1,0 +1,225 @@
+.sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  height: 100vh;
+  padding: 28px 20px 24px;
+  background: var(--color-bg-sunken);
+  border-right: 1px solid var(--color-line);
+  overflow-y: auto;
+}
+
+.sidebar__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.sidebar__brand:hover {
+  color: var(--color-text);
+}
+
+.sidebar__mark {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--color-line-strong);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+.sidebar__id {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.sidebar__name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.sidebar__role {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.sidebar__toggle {
+  display: none;
+}
+
+.sidebar__panel {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.sidebar__status {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  border: 1px solid var(--color-ok-line);
+  background: var(--color-ok-bg);
+  font-size: 12px;
+  color: var(--color-ok-text);
+}
+
+.sidebar__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-ok);
+}
+
+.sidebar__nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 44px;
+  padding: 0 12px;
+  font-size: 15px;
+  color: var(--color-text-soft);
+  text-decoration: none;
+  transition:
+    background var(--duration),
+    color var(--duration);
+}
+
+.sidebar__link:hover {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.sidebar__link.active {
+  background: var(--color-surface-2);
+  box-shadow: inset 2px 0 0 var(--color-accent);
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.sidebar__index {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.sidebar__link.active .sidebar__index {
+  color: var(--color-accent);
+}
+
+.sidebar__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-line);
+}
+
+.sidebar__search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  padding: 0 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-strong);
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+.sidebar__search:hover {
+  border-color: var(--color-text-muted);
+}
+
+.sidebar__search kbd {
+  font-family: inherit;
+  color: var(--color-text-soft);
+}
+
+.sidebar__socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+}
+
+.sidebar__socials a {
+  display: inline-block;
+  padding: 6px 0;
+  text-decoration: none;
+}
+
+.sidebar__loc {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+/* Celular / tablet: vira barra no topo com menu que abre por baixo */
+@media (max-width: 900px) {
+  .sidebar {
+    z-index: 20;
+    height: auto;
+    gap: 0;
+    padding: 12px 16px;
+    border-right: 0;
+    border-bottom: 1px solid var(--color-line);
+    overflow: visible;
+  }
+
+  .sidebar__toggle {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 14px;
+    background: transparent;
+    border: 1px solid var(--color-line-strong);
+    font-size: 12px;
+    color: var(--color-text-soft);
+  }
+
+  .sidebar__panel {
+    display: none;
+    padding-top: 20px;
+  }
+
+  .sidebar[data-open='true'] .sidebar__panel {
+    display: flex;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+  }
+
+  .sidebar__search {
+    display: none;
+  }
+}

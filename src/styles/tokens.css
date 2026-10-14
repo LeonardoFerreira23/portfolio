@@ -1,0 +1,51 @@
+/* Design tokens — a identidade visual inteira sai daqui. */
+:root {
+  --color-bg: #0c0d0f;
+  --color-bg-sunken: #0e0f12;
+  --color-surface: #121418;
+  --color-surface-2: #1b1e23;
+  --color-line: #23262c;
+  --color-line-strong: #3a3e46;
+
+  --color-text: #e6e7ea;
+  --color-text-soft: #c9ccd2;
+  --color-text-muted: #9aa0a8;
+
+  --color-accent: #e0a84f;
+  --color-accent-hover: #f2c57d;
+  --color-on-accent: #14110b;
+
+  --color-ok: #5fbf8a;
+  --color-ok-text: #7fd1a3;
+  --color-ok-bg: #13201a;
+  --color-ok-line: #2c4a3a;
+
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --sidebar-width: 272px;
+  --content-width: 1400px;
+  --page-gutter: 56px;
+  --section-gap: 72px;
+
+  --duration: 160ms;
+}
+
+@media (max-width: 1100px) {
+  :root {
+    --page-gutter: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --page-gutter: 16px;
+    --section-gap: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration: 0ms;
+  }
+}

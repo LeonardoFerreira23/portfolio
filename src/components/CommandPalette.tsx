@@ -1,19 +1,21 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from 'react'
 import { useNavigate, type NavigateFunction } from 'react-router'
-import { contact, pages, projects } from '../data/content'
+import type { SiteContent } from '../data/content'
+import { useContent } from '../i18n/language'
 import './CommandPalette.css'
 
 type Command = { id: string; label: string; hint: string; run: () => void }
 
 type Props = { open: boolean; onClose: () => void }
 
-function buildCommands(navigate: NavigateFunction): Command[] {
+function buildCommands(navigate: NavigateFunction, { pages, projects, contact, ui }: SiteContent): Command[] {
   const openLink = (href: string) => () => window.open(href, href.startsWith('http') ? '_blank' : '_self')
+  const t = ui.palette
 
   return [
-    ...pages.map((p) => ({ id: `page-${p.path}`, label: p.label, hint: 'página', run: () => navigate(p.path) })),
-    ...projects.map((p) => ({ id: `proj-${p.title}`, label: p.title, hint: 'projeto', run: () => navigate('/projetos') })),
-    ...contact.links.map((l) => ({ id: `link-${l.label}`, label: l.label, hint: 'abrir', run: openLink(l.href) })),
+    ...pages.map((p) => ({ id: `page-${p.path}`, label: p.label, hint: t.page, run: () => navigate(p.path) })),
+    ...projects.map((p, i) => ({ id: `proj-${i}`, label: p.title, hint: t.project, run: () => navigate('/projetos') })),
+    ...contact.links.map((l) => ({ id: `link-${l.label}`, label: l.label, hint: t.open, run: openLink(l.href) })),
   ]
 }
 
@@ -23,7 +25,9 @@ export function CommandPalette({ open, onClose }: Props) {
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
   const navigate = useNavigate()
-  const commands = useMemo(() => buildCommands(navigate), [navigate])
+  const content = useContent()
+  const t = content.ui.palette
+  const commands = useMemo(() => buildCommands(navigate, content), [navigate, content])
 
   const results = commands.filter((c) => c.label.toLowerCase().includes(query.trim().toLowerCase()))
 
@@ -65,13 +69,13 @@ export function CommandPalette({ open, onClose }: Props) {
       className="palette"
       onClose={onClose}
       onClick={(e) => e.target === dialogRef.current && onClose()}
-      aria-label="Paleta de comandos"
+      aria-label={t.label}
     >
       <div className="palette__box" onKeyDown={onKeyDown}>
         <input
           ref={inputRef}
           className="palette__input mono"
-          placeholder="Para onde você quer ir?"
+          placeholder={t.placeholder}
           value={query}
           onChange={(e) => {
             setQuery(e.target.value)
@@ -95,12 +99,12 @@ export function CommandPalette({ open, onClose }: Props) {
               <span className="palette__hint mono">{c.hint}</span>
             </li>
           ))}
-          {results.length === 0 && <li className="palette__empty mono">Nada encontrado.</li>}
+          {results.length === 0 && <li className="palette__empty mono">{t.empty}</li>}
         </ul>
         <div className="palette__footer mono">
-          <span>↑ ↓ navegar</span>
-          <span>Enter abrir</span>
-          <span>Esc fechar</span>
+          <span>{t.navigate}</span>
+          <span>{t.select}</span>
+          <span>{t.close}</span>
         </div>
       </div>
     </dialog>

@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react'
 import { NavLink, useLocation } from 'react-router'
-import { contact, pages, profile } from '../data/content'
+import { useContent } from '../i18n/language'
+import { LangToggle } from './LangToggle'
 import './Sidebar.css'
 
 type Props = { onOpenPalette: () => void }
@@ -8,6 +9,7 @@ type Props = { onOpenPalette: () => void }
 const socialLabels = ['github', 'linkedin', 'e-mail']
 
 export function Sidebar({ onOpenPalette }: Props) {
+  const { profile, contact, pages, ui } = useContent()
   const [menuOpen, setMenuOpen] = useState(false)
   // No celular, o menu fecha ao escolher uma página.
   const closeMenu = () => setMenuOpen(false)
@@ -29,7 +31,7 @@ export function Sidebar({ onOpenPalette }: Props) {
     indicator.style.opacity = '1'
     indicator.style.transform = `translateY(${active.offsetTop}px)`
     indicator.style.height = `${active.offsetHeight}px`
-  }, [pathname, menuOpen])
+  }, [pathname, menuOpen, pages])
 
   return (
     <aside className="sidebar" data-open={menuOpen}>
@@ -44,6 +46,8 @@ export function Sidebar({ onOpenPalette }: Props) {
           </span>
         </NavLink>
 
+        <LangToggle className="sidebar__lang-mobile" />
+
         <button
           type="button"
           className="sidebar__toggle mono"
@@ -51,7 +55,7 @@ export function Sidebar({ onOpenPalette }: Props) {
           aria-controls="sidebar-panel"
           onClick={() => setMenuOpen((open) => !open)}
         >
-          {menuOpen ? 'Fechar' : 'Menu'}
+          {menuOpen ? ui.nav.menuClose : ui.nav.menuOpen}
         </button>
       </div>
 
@@ -59,11 +63,11 @@ export function Sidebar({ onOpenPalette }: Props) {
         {profile.available && (
           <span className="sidebar__status mono">
             <span className="sidebar__dot" aria-hidden="true" />
-            Disponível para vagas
+            {ui.nav.available}
           </span>
         )}
 
-        <nav aria-label="Páginas" className="sidebar__nav">
+        <nav aria-label={ui.nav.pagesLabel} className="sidebar__nav">
           <span ref={indicatorRef} className="sidebar__indicator" aria-hidden="true" />
           <ul ref={listRef}>
             {pages.map((page) => (
@@ -80,12 +84,15 @@ export function Sidebar({ onOpenPalette }: Props) {
         </nav>
 
         <div className="sidebar__bottom">
-          <button type="button" className="sidebar__search mono" onClick={onOpenPalette}>
-            <span>Buscar</span>
-            <kbd>Ctrl K</kbd>
-          </button>
+          <div className="sidebar__tools">
+            <button type="button" className="sidebar__search mono" onClick={onOpenPalette}>
+              <span>{ui.nav.search}</span>
+              <kbd>Ctrl K</kbd>
+            </button>
+            <LangToggle className="sidebar__lang-desktop" />
+          </div>
 
-          <ul className="sidebar__socials mono" aria-label="Redes">
+          <ul className="sidebar__socials mono" aria-label={ui.nav.socialLabel}>
             {socials.map((l) => (
               <li key={l.label}>
                 <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">

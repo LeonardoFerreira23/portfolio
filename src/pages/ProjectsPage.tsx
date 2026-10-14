@@ -1,14 +1,16 @@
-import { projects } from '../data/content'
+import { useContent } from '../i18n/language'
 import { PageHead } from '../components/PageHead'
 import { ProjectGrid } from '../components/ProjectCard'
 
 export function ProjectsPage() {
+  const { projects, ui } = useContent()
+  const t = ui.projectsPage
   return (
     <>
       <PageHead
-        index="02 / projetos"
-        title="Estudos de caso"
-        lede="Cada projeto mostra o problema, o fluxo da solução e o que foi entregue."
+        index={t.index}
+        title={t.title}
+        lede={t.lede}
       />
       <ProjectGrid projects={projects} heading="h2" />
     </>

@@ -176,7 +176,18 @@
   border-top: 1px solid var(--color-line);
 }
 
+/* Busca + seletor de idioma lado a lado */
+.sidebar__tools {
+  display: flex;
+  gap: 8px;
+}
+
+.sidebar__lang-mobile {
+  display: none;
+}
+
 .sidebar__search {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -258,7 +269,17 @@
     overflow-y: auto;
   }
 
-  .sidebar__search {
+  .sidebar__search,
+  .sidebar__lang-desktop {
     display: none;
+  }
+
+  .sidebar__lang-mobile {
+    display: inline-flex;
+    margin-left: auto;
+  }
+
+  .sidebar__lang-mobile .lang-toggle__btn {
+    min-height: 36px;
   }
 }

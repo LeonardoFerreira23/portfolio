@@ -1,11 +1,12 @@
 import { Link } from 'react-router'
-import { profile } from '../data/content'
+import { useContent } from '../i18n/language'
 import { ProfilePanel } from './ProfilePanel'
 import { Typewriter } from './Typewriter'
 import { SplitReveal } from './SplitReveal'
 import './Hero.css'
 
 export function Hero() {
+  const { profile, ui } = useContent()
   return (
     <section className="hero">
       <div className="hero__main stagger">
@@ -19,7 +20,7 @@ export function Hero() {
           </span>
         </h1>
         <p className="hero__statement">{profile.statement}</p>
-        <ul className="hero__chips" aria-label="Stack principal">
+        <ul className="hero__chips" aria-label={ui.hero.stackLabel}>
           {profile.chips.map((chip) => (
             <li key={chip} className="chip">
               {chip}
@@ -28,10 +29,10 @@ export function Hero() {
         </ul>
         <div className="hero__actions">
           <Link to="/projetos" className="btn btn--primary">
-            Ver estudos de caso
+            {ui.hero.ctaProjects}
           </Link>
           <Link to="/contato" className="btn btn--ghost">
-            Currículo / Contato
+            {ui.hero.ctaContact}
           </Link>
         </div>
       </div>

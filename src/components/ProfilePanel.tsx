@@ -1,34 +1,30 @@
 import { useEffect, useState, type CSSProperties } from 'react'
-import { profile } from '../data/content'
+import { useContent } from '../i18n/language'
 import './ProfilePanel.css'
 
-const clockFormat = new Intl.DateTimeFormat('pt-BR', {
-  hour: '2-digit',
-  minute: '2-digit',
-  timeZone: profile.timeZone,
-})
-
-function now() {
-  return clockFormat.format(new Date())
+/** Hora atual no fuso do perfil, sempre no formato 24h (ex.: 13:05). */
+function now(timeZone: string) {
+  return new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone }).format(new Date())
 }
 
 /** Painel estilo console ao lado do hero: fatos rápidos + hora local ao vivo. */
 export function ProfilePanel() {
-  const [time, setTime] = useState(now)
+  const { profile, ui } = useContent()
+  const [time, setTime] = useState(() => now(profile.timeZone))
 
   useEffect(() => {
-    const id = window.setInterval(() => setTime(now()), 15_000)
+    const id = window.setInterval(() => setTime(now(profile.timeZone)), 15_000)
     return () => window.clearInterval(id)
-  }, [])
+  }, [profile.timeZone])
 
   return (
-    <aside className="panel glow-border" aria-label="Resumo do perfil">
+    <aside className="panel glow-border" aria-label={ui.panel.label}>
       <div className="panel__bar mono">
-        <span>perfil.ts</span>
+        <span>{ui.panel.file}</span>
         {profile.available && (
           <span className="panel__status">
             <span className="panel__dot" aria-hidden="true" />
-            disponível
+            {ui.panel.status}
           </span>
         )}
       </div>
@@ -41,7 +37,7 @@ export function ProfilePanel() {
           </div>
         ))}
         <div className="panel__row" style={{ '--i': profile.facts.length } as CSSProperties}>
-          <dt>hora local</dt>
+          <dt>{ui.panel.localTime}</dt>
           <dd>
             <time className="panel__clock">{time}</time> <span className="panel__tz">UTC−3</span>
           </dd>
@@ -52,7 +48,7 @@ export function ProfilePanel() {
         <span className="panel__caret" aria-hidden="true">
           ›
         </span>{' '}
-        aberto ao próximo projeto
+        {ui.panel.prompt}
         <span className="panel__cursor" aria-hidden="true" />
       </p>
     </aside>

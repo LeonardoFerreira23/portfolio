@@ -1,6 +1,7 @@
-import { contact } from '../data/content'
+import { useContent } from '../i18n/language'
 
 export function ContactList() {
+  const { contact } = useContent()
   return (
     <dl
       className="mono"

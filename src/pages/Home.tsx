@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import { projects } from '../data/content'
+import { useContent } from '../i18n/language'
 import { Hero } from '../components/Hero'
 import { Achievement } from '../components/Achievement'
 import { SectionHead } from '../components/SectionHead'
@@ -10,6 +10,7 @@ import { usePageTitle } from '../hooks/usePageTitle'
 const FEATURED = 3
 
 export function Home() {
+  const { projects, ui } = useContent()
   usePageTitle()
   return (
     <>
@@ -18,14 +19,14 @@ export function Home() {
       <section className="section" aria-labelledby="destaques-title">
         <SectionHead
           id="destaques-title"
-          index="em destaque"
-          title="Projetos recentes"
-          lede={`${projects.length} estudos de caso com problema, arquitetura e resultado.`}
+          index={ui.home.featuredIndex}
+          title={ui.home.featuredTitle}
+          lede={ui.home.featuredLede(projects.length)}
         />
         <ProjectGrid projects={projects.slice(0, FEATURED)} />
         <p style={{ marginTop: 28 }}>
           <Link to="/projetos" className="btn btn--ghost">
-            Ver todos os projetos <span className="btn__arrow" aria-hidden="true">→</span>
+            {ui.home.seeAll} <span className="btn__arrow" aria-hidden="true">→</span>
           </Link>
         </p>
       </section>

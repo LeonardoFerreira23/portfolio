@@ -1,7 +1,8 @@
 import type { CSSProperties } from 'react'
-import { timeline } from '../data/content'
+import { useContent } from '../i18n/language'
 
 export function Timeline() {
+  const { timeline } = useContent()
   return (
     <ol style={{ padding: 0, listStyle: 'none' }}>
       {timeline.map((t, i) => (

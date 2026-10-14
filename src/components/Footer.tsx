@@ -1,8 +1,9 @@
-import { profile } from '../data/content'
+import { useContent } from '../i18n/language'
 
 const YEAR = new Date().getFullYear()
 
 export function Footer() {
+  const { profile } = useContent()
   return (
     <footer
       className="mono"

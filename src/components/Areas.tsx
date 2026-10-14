@@ -1,11 +1,12 @@
 import type { CSSProperties } from 'react'
-import { areas } from '../data/content'
+import { useContent } from '../i18n/language'
 import { SectionHead } from './SectionHead'
 
 export function Areas() {
+  const { areas, ui } = useContent()
   return (
     <section className="section" aria-labelledby="areas-title" style={{ marginTop: 32 }}>
-      <SectionHead id="areas-title" index="áreas" title="Onde eu atuo" />
+      <SectionHead id="areas-title" index={ui.experiencePage.areasIndex} title={ui.experiencePage.areasTitle} />
       <div
         style={{
           display: 'grid',

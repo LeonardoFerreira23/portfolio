@@ -5,11 +5,14 @@ import './styles/tokens.css'
 import './styles/global.css'
 import './styles/motion.css'
 import App from './App'
+import { LanguageProvider } from './i18n/LanguageProvider'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <LanguageProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </LanguageProvider>
   </StrictMode>,
 )

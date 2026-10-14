@@ -1,5 +1,5 @@
-// Todo o conteúdo do site fica aqui; os componentes só renderizam o que estiver neste arquivo.
-// Troque tudo que está entre [colchetes] pelos seus dados reais.
+// Conteúdo do site em PORTUGUÊS. A versão em inglês fica em content.en.ts.
+// Ao mudar algo aqui (ex.: adicionar um projeto), faça o mesmo em content.en.ts.
 
 export type Project = {
   kind: string
@@ -18,7 +18,7 @@ export type Area = { title: string; body: string; keywords: string }
 export type TimelineItem = { period: string; title: string; body: string }
 export type ContactLink = { label: string; text: string; href: string }
 
-export const profile = {
+const profile = {
   name: 'Leonardo Ferreira',
   initials: 'LF',
   role: 'Desenvolvedor Full Stack',
@@ -48,9 +48,9 @@ export const profile = {
   ],
 }
 
-const GH = 'https://github.com'
+export const GH = 'https://github.com'
 
-export const projects: Project[] = [
+const projects: Project[] = [
   {
     kind: 'Backend · Produção',
     status: 'Behive Tecnologia · v1.2',
@@ -110,14 +110,14 @@ export const projects: Project[] = [
   },
 ]
 
-export const areas: Area[] = [
+const areas: Area[] = [
   { title: 'Front-end', body: 'Interfaces web responsivas, componentes reutilizáveis e testes.', keywords: 'React · Next.js · TypeScript · Vitest' },
   { title: 'Backend e APIs', body: 'Serviços REST, modelagem de dados e integração.', keywords: 'Spring Boot · FastAPI · PostgreSQL' },
   { title: 'Entrega e infraestrutura', body: 'Containers e pipelines de integração contínua.', keywords: 'Docker · Jenkins' },
   { title: 'Requisitos e cliente', body: 'Levantamento, alinhamento de expectativas e suporte técnico.', keywords: 'Escopo · Comunicação' },
 ]
 
-export const timeline: TimelineItem[] = [
+const timeline: TimelineItem[] = [
   {
     period: '2019 — 2026',
     title: 'Analista · Behive Tecnologia',
@@ -127,15 +127,15 @@ export const timeline: TimelineItem[] = [
   { period: 'concluído', title: 'Técnico em Eletrônica · ETE FMC', body: 'Ênfase em Automação Industrial.' },
 ]
 
-export const achievement = {
+const achievement = {
   highlight: '2×',
   title: 'Campeão do Hackathon Construtech',
   detail: '1º lugar em 2024 · 1º lugar em 2025',
 }
 
-export const contact = {
+const contact = {
   title: 'Vamos conversar.',
-  body: 'Aberto a vagas de backend. Respondo em português ou inglês.',
+  body: 'Aberto a vagas full stack. Respondo em português ou inglês.',
   links: [
     { label: 'e-mail', text: 'leonardo.fer201@gmail.com', href: 'mailto:leonardo.fer201@gmail.com' },
     { label: 'github', text: 'github.com/LeonardoFerreira23', href: 'https://github.com/LeonardoFerreira23' },
@@ -146,9 +146,88 @@ export const contact = {
 }
 
 /** Páginas do site — alimentam a sidebar e a paleta de comandos (Ctrl K). */
-export const pages = [
+const pages = [
   { path: '/', label: 'Início', index: '01' },
   { path: '/projetos', label: 'Projetos', index: '02' },
   { path: '/experiencia', label: 'Experiência', index: '03' },
   { path: '/contato', label: 'Contato', index: '04' },
 ]
+
+/** Textos de interface (botões, rótulos, menus). */
+const ui = {
+  locale: 'pt-BR',
+  metaDescription:
+    'Leonardo Ferreira — Desenvolvedor Full Stack com 7 anos de experiência no mercado. React, TypeScript, Java, Python e PostgreSQL.',
+  skipLink: 'Pular para o conteúdo',
+  nav: {
+    pagesLabel: 'Páginas',
+    socialLabel: 'Redes',
+    menuOpen: 'Menu',
+    menuClose: 'Fechar',
+    search: 'Buscar',
+    available: 'Disponível para vagas',
+    languageLabel: 'Idioma',
+  },
+  hero: {
+    stackLabel: 'Stack principal',
+    ctaProjects: 'Ver estudos de caso',
+    ctaContact: 'Currículo / Contato',
+  },
+  panel: {
+    label: 'Resumo do perfil',
+    file: 'perfil.ts',
+    status: 'disponível',
+    localTime: 'hora local',
+    prompt: 'aberto ao próximo projeto',
+  },
+  project: {
+    flowLabel: 'Fluxo da arquitetura',
+    stackLabel: 'Tecnologias',
+    live: 'ver online',
+    code: 'código',
+  },
+  home: {
+    featuredIndex: 'em destaque',
+    featuredTitle: 'Projetos recentes',
+    featuredLede: (n: number) => `${n} estudos de caso com problema, arquitetura e resultado.`,
+    seeAll: 'Ver todos os projetos',
+    achievementLabel: 'Conquistas',
+  },
+  projectsPage: {
+    index: '02 / projetos',
+    title: 'Estudos de caso',
+    lede: 'Cada projeto mostra o problema, o fluxo da solução e o que foi entregue.',
+  },
+  experiencePage: {
+    index: '03 / trajetória',
+    title: 'Experiência e formação',
+    lede: '7 anos de experiência no mercado, do levantamento de requisitos com o cliente ao código em produção.',
+    areasIndex: 'áreas',
+    areasTitle: 'Onde eu atuo',
+  },
+  contactPage: {
+    index: '04 / contato',
+  },
+  notFound: {
+    title: 'Página não encontrada',
+    lede: 'O endereço não existe ou mudou de lugar.',
+    back: 'Voltar ao início',
+  },
+  palette: {
+    label: 'Paleta de comandos',
+    openLabel: 'Abrir paleta de comandos',
+    placeholder: 'Para onde você quer ir?',
+    page: 'página',
+    project: 'projeto',
+    open: 'abrir',
+    empty: 'Nada encontrado.',
+    navigate: '↑ ↓ navegar',
+    select: 'Enter abrir',
+    close: 'Esc fechar',
+  },
+}
+
+export const pt = { profile, projects, areas, timeline, achievement, contact, pages, ui }
+
+/** Formato que as duas versões (pt e en) precisam seguir. */
+export type SiteContent = typeof pt

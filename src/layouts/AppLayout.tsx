@@ -7,9 +7,12 @@ import { useHotkey } from '../hooks/useHotkey'
 import { useRevealOnScroll } from '../hooks/useRevealOnScroll'
 import { usePointerEffects } from '../hooks/usePointerEffects'
 import { useScrollProgress } from '../hooks/useScrollProgress'
+import { useLanguage } from '../i18n/language'
 import './AppLayout.css'
 
 export function AppLayout() {
+  const { lang, content } = useLanguage()
+  const { ui } = content
   const [paletteOpen, setPaletteOpen] = useState(false)
   const togglePalette = useCallback(() => setPaletteOpen((open) => !open), [])
   useHotkey('k', togglePalette)
@@ -27,7 +30,8 @@ export function AppLayout() {
     mainRef.current?.focus({ preventScroll: true })
   }, [pathname])
 
-  useRevealOnScroll(mainRef, pathname)
+  // Roda de novo ao trocar de página ou de idioma (itens recriados precisam aparecer)
+  useRevealOnScroll(mainRef, `${pathname}:${lang}`)
   usePointerEffects()
   useScrollProgress()
 
@@ -37,7 +41,7 @@ export function AppLayout() {
       <div className="cursor-glow" aria-hidden="true" />
       <div className="scroll-progress" aria-hidden="true" />
       <a href="#conteudo" className="skip-link">
-        Pular para o conteúdo
+        {ui.skipLink}
       </a>
       <Sidebar onOpenPalette={() => setPaletteOpen(true)} />
       <div className="layout__body">

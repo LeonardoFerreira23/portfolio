@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import type { Project } from '../data/content'
 import './Projects.css'
 
@@ -7,16 +8,18 @@ type Heading = 'h2' | 'h3'
 export function ProjectGrid({ projects, heading = 'h3' }: { projects: Project[]; heading?: Heading }) {
   return (
     <div className="projects">
-      {projects.map((p) => (
-        <ProjectCard key={p.title} project={p} heading={heading} />
+      {projects.map((p, i) => (
+        <ProjectCard key={p.title} project={p} heading={heading} index={i} />
       ))}
     </div>
   )
 }
 
-export function ProjectCard({ project, heading: Title = 'h3' }: { project: Project; heading?: Heading }) {
+type CardProps = { project: Project; heading?: Heading; index?: number }
+
+export function ProjectCard({ project, heading: Title = 'h3', index = 0 }: CardProps) {
   return (
-    <article className="project">
+    <article className="project spotlight" data-reveal style={{ '--reveal-delay': `${(index % 3) * 90}ms` } as CSSProperties}>
       <div className="project__meta mono">
         <span className="project__kind">{project.kind}</span>
         <span>{project.status}</span>
@@ -26,7 +29,7 @@ export function ProjectCard({ project, heading: Title = 'h3' }: { project: Proje
 
       <ol className="project__flow mono" aria-label="Fluxo da arquitetura">
         {project.flow.map((step, i) => (
-          <li key={`${step}-${i}`}>
+          <li key={`${step}-${i}`} style={{ '--i': i } as CSSProperties}>
             {i > 0 && (
               <span className="project__arrow" aria-hidden="true">
                 →

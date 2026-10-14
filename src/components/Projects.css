@@ -15,7 +15,18 @@
 }
 
 .project:hover {
-  border-color: var(--color-line-strong);
+  border-color: rgba(224, 168, 79, 0.35);
+}
+
+.project[data-reveal].is-visible {
+  transition:
+    opacity 640ms var(--ease-out),
+    transform 280ms var(--ease-out),
+    border-color var(--duration);
+}
+
+.project[data-reveal].is-visible:hover {
+  transform: translateY(-3px);
 }
 
 .project__meta {
@@ -67,7 +78,40 @@
 }
 
 .project__arrow {
+  display: inline-block;
   color: var(--color-accent);
+}
+
+/* Ao passar o mouse, as setas do fluxo "acendem" em sequência, como dados passando */
+.project:hover .project__arrow {
+  animation: flow-pulse 1.4s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 140ms);
+}
+
+@keyframes flow-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: none;
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+}
+
+.project__repo span,
+.project__repo {
+  transition: color var(--duration);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project:hover .project__arrow {
+    animation: none;
+  }
+  .project[data-reveal].is-visible:hover {
+    transform: none;
+  }
 }
 
 .project__outcome {

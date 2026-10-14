@@ -1,13 +1,16 @@
 import { Link } from 'react-router'
 import { profile } from '../data/content'
 import { ProfilePanel } from './ProfilePanel'
+import { Typewriter } from './Typewriter'
 import './Hero.css'
 
 export function Hero() {
   return (
     <section className="hero">
-      <div className="hero__main">
-        <p className="hero__kicker mono">{profile.kicker}</p>
+      <div className="hero__main stagger">
+        <p className="hero__kicker mono">
+          <Typewriter text={profile.kicker} />
+        </p>
         <h1 className="hero__title">
           {profile.name}
           <span className="hero__dot">.</span>

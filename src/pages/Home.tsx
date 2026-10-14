@@ -25,7 +25,7 @@ export function Home() {
         <ProjectGrid projects={projects.slice(0, FEATURED)} />
         <p style={{ marginTop: 28 }}>
           <Link to="/projetos" className="btn btn--ghost">
-            Ver todos os projetos →
+            Ver todos os projetos <span className="btn__arrow" aria-hidden="true">→</span>
           </Link>
         </p>
       </section>

@@ -4,6 +4,12 @@
   min-height: 100vh;
 }
 
+/* O conteúdo fica acima das camadas de fundo (.backdrop / .cursor-glow); a sidebar tem z-index próprio */
+.layout__body {
+  position: relative;
+  z-index: 1;
+}
+
 .layout__body {
   display: flex;
   flex-direction: column;

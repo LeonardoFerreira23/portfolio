@@ -1,6 +1,7 @@
 .sidebar {
   position: sticky;
   top: 0;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -110,12 +111,19 @@
   text-decoration: none;
   transition:
     background var(--duration),
-    color var(--duration);
+    color var(--duration),
+    box-shadow 240ms var(--ease-out),
+    padding-left 240ms var(--ease-out);
 }
 
 .sidebar__link:hover {
+  padding-left: 16px;
   background: var(--color-surface);
   color: var(--color-text);
+}
+
+.sidebar__link:hover .sidebar__index {
+  color: var(--color-accent);
 }
 
 .sidebar__link.active {
@@ -128,6 +136,7 @@
 .sidebar__index {
   font-size: 11px;
   color: var(--color-text-muted);
+  transition: color var(--duration);
 }
 
 .sidebar__link.active .sidebar__index {

@@ -79,7 +79,9 @@ button {
   text-decoration: none;
   transition:
     background var(--duration),
-    border-color var(--duration);
+    border-color var(--duration),
+    box-shadow 220ms var(--ease-out),
+    transform 120ms;
 }
 
 .btn--primary {
@@ -89,7 +91,22 @@ button {
 
 .btn--primary:hover {
   background: var(--color-accent-hover);
+  box-shadow: 0 0 0 4px rgba(224, 168, 79, 0.16), 0 8px 28px -8px rgba(224, 168, 79, 0.45);
   color: var(--color-on-accent);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn__arrow {
+  display: inline-block;
+  margin-left: 8px;
+  transition: transform 220ms var(--ease-out);
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(4px);
 }
 
 .btn--ghost {

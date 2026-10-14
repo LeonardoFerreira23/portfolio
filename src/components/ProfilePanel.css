@@ -102,9 +102,29 @@
   }
 }
 
+/* Linhas "impressas" uma depois da outra, como num terminal */
+.panel__row,
+.panel__prompt {
+  animation: panel-print 420ms var(--ease-out) both;
+  animation-delay: calc(600ms + var(--i, 0) * 85ms);
+}
+
+@keyframes panel-print {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .panel__dot,
-  .panel__cursor {
+  .panel__cursor,
+  .panel__row,
+  .panel__prompt {
     animation: none;
   }
 }

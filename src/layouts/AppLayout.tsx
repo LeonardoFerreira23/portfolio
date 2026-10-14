@@ -4,6 +4,8 @@ import { Sidebar } from '../components/Sidebar'
 import { Footer } from '../components/Footer'
 import { CommandPalette } from '../components/CommandPalette'
 import { useHotkey } from '../hooks/useHotkey'
+import { useRevealOnScroll } from '../hooks/useRevealOnScroll'
+import { usePointerEffects } from '../hooks/usePointerEffects'
 import './AppLayout.css'
 
 export function AppLayout() {
@@ -24,15 +26,22 @@ export function AppLayout() {
     mainRef.current?.focus({ preventScroll: true })
   }, [pathname])
 
+  useRevealOnScroll(mainRef, pathname)
+  usePointerEffects()
+
   return (
     <div className="layout">
+      <div className="backdrop" aria-hidden="true" />
+      <div className="cursor-glow" aria-hidden="true" />
       <a href="#conteudo" className="skip-link">
         Pular para o conteúdo
       </a>
       <Sidebar onOpenPalette={() => setPaletteOpen(true)} />
       <div className="layout__body">
         <main id="conteudo" ref={mainRef} tabIndex={-1} className="layout__main">
-          <Outlet />
+          <div key={pathname} className="page-enter">
+            <Outlet />
+          </div>
         </main>
         <Footer />
       </div>

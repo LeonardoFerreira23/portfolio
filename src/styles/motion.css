@@ -1,0 +1,132 @@
+/*
+ * Animações e efeitos do site.
+ * Tudo aqui é desligado automaticamente quando o sistema da pessoa
+ * está com "reduzir movimento" ativado (bloco no fim do arquivo).
+ */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Troca de página: o conteúdo novo entra com um fade curto */
+.page-enter {
+  animation: fade-in 260ms ease-out both;
+}
+
+/* Entrada em cascata: cada filho entra um pouco depois do anterior */
+.stagger > * {
+  animation: fade-up 640ms var(--ease-out) both;
+  animation-delay: calc(var(--stagger-base, 0ms) + var(--i, 0) * 90ms);
+}
+.stagger > :nth-child(2) { --i: 1; }
+.stagger > :nth-child(3) { --i: 2; }
+.stagger > :nth-child(4) { --i: 3; }
+.stagger > :nth-child(5) { --i: 4; }
+.stagger > :nth-child(6) { --i: 5; }
+.stagger > :nth-child(7) { --i: 6; }
+
+/* Revelar ao rolar: elementos com data-reveal aparecem quando entram na tela */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 640ms var(--ease-out),
+    transform 640ms var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Spotlight: brilho suave que segue o mouse dentro de cards (.spotlight) */
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), rgba(224, 168, 79, 0.09), transparent 70%);
+  opacity: 0;
+  transition: opacity 300ms;
+  pointer-events: none;
+}
+
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* Fundo: grade de pontos discreta + brilho que acompanha o cursor */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 26px 26px;
+  mask-image: radial-gradient(ellipse 60% 55% at 78% 8%, #000 0%, transparent 72%);
+}
+
+.cursor-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(560px circle at var(--gx, -1000px) var(--gy, -1000px), rgba(224, 168, 79, 0.05), transparent 65%);
+}
+
+/* Cursor de digitação */
+.type-caret {
+  display: inline-block;
+  width: 7px;
+  height: 1.1em;
+  margin-left: 3px;
+  vertical-align: -0.18em;
+  background: currentColor;
+  animation: blink 1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter,
+  .stagger > *,
+  .type-caret {
+    animation: none;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .cursor-glow {
+    display: none;
+  }
+}

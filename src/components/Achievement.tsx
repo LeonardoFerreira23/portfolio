@@ -4,6 +4,7 @@ export function Achievement() {
   return (
     <section
       className="section"
+      data-reveal
       aria-label="Conquistas"
       style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '24px 56px', paddingBlock: 48 }}
     >

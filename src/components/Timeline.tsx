@@ -1,12 +1,23 @@
+import type { CSSProperties } from 'react'
 import { timeline } from '../data/content'
 
 export function Timeline() {
   return (
     <ol style={{ padding: 0, listStyle: 'none' }}>
-      {timeline.map((t) => (
+      {timeline.map((t, i) => (
         <li
           key={t.title}
-          style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 32px', padding: '24px 0', borderTop: '1px solid var(--color-line)' }}
+          data-reveal
+          style={
+            {
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '8px 32px',
+              padding: '24px 0',
+              borderTop: '1px solid var(--color-line)',
+              '--reveal-delay': `${i * 110}ms`,
+            } as CSSProperties
+          }
         >
           <span className="mono" style={{ flex: '0 0 140px', fontSize: 13, color: 'var(--color-text-muted)' }}>
             {t.period}

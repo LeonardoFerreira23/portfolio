@@ -4,6 +4,7 @@ export function ContactList() {
   return (
     <dl
       className="mono"
+      data-reveal
       style={{
         display: 'grid',
         gridTemplateColumns: 'minmax(90px, 140px) 1fr',

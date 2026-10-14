@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import { profile } from '../data/content'
 import './ProfilePanel.css'
 
@@ -34,13 +34,13 @@ export function ProfilePanel() {
       </div>
 
       <dl className="panel__list mono">
-        {profile.facts.map((f) => (
-          <div key={f.label} className="panel__row">
+        {profile.facts.map((f, i) => (
+          <div key={f.label} className="panel__row" style={{ '--i': i } as CSSProperties}>
             <dt>{f.label}</dt>
             <dd>{f.value}</dd>
           </div>
         ))}
-        <div className="panel__row">
+        <div className="panel__row" style={{ '--i': profile.facts.length } as CSSProperties}>
           <dt>hora local</dt>
           <dd>
             <time className="panel__clock">{time}</time> <span className="panel__tz">UTC−3</span>
@@ -48,7 +48,7 @@ export function ProfilePanel() {
         </div>
       </dl>
 
-      <p className="panel__prompt mono">
+      <p className="panel__prompt mono" style={{ '--i': profile.facts.length + 1 } as CSSProperties}>
         <span className="panel__caret" aria-hidden="true">
           ›
         </span>{' '}

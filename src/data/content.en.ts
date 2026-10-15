@@ -2,7 +2,12 @@
 // Fields that don't change between languages (links, stack, name) are reused from the Portuguese version.
 import { pt, type SiteContent } from './content'
 
-const [bhvTransfer, construai, battle, restfulBooker, divideAi] = pt.projects
+/** Busca o projeto em português pelo nome do repositório (a ordem da lista pode mudar). */
+const base = (repoName: string) => {
+  const project = pt.projects.find((p) => p.repo?.endsWith(`/${repoName}`))
+  if (!project) throw new Error(`Projeto não encontrado em content.ts: ${repoName}`)
+  return project
+}
 
 export const en: SiteContent = {
   profile: {
@@ -31,7 +36,7 @@ export const en: SiteContent = {
 
   projects: [
     {
-      ...bhvTransfer,
+      ...base('bhv-transfer'),
       kind: 'Backend · Production',
       summary:
         'API that centralizes the intake of technical inspection packages. Technicians pick the site and owner from menus, drop the package (.zip/.rar), and the system organizes the files on the server and returns a download link.',
@@ -40,7 +45,7 @@ export const en: SiteContent = {
         'No more manual typing of identifiers, plus automatic organization per technician. Upload and link-generation logic covered by tests with JUnit 5 and Mockito.',
     },
     {
-      ...construai,
+      ...base('construai'),
       kind: 'Applied AI · Hackathon',
       status: '1st place · 2025',
       summary:
@@ -49,7 +54,25 @@ export const en: SiteContent = {
       outcome: 'Winner of the Construtech Hackathon 2025.',
     },
     {
-      ...battle,
+      ...base('divide-ai-front'),
+      kind: 'Web · CI/CD',
+      status: 'Live · C14',
+      summary:
+        'Web app for splitting group expenses: create groups, log spending, see who owes whom and settle up. Layered architecture (data, domain, presentation).',
+      flow: ['Push', 'Jenkins', 'Lint + build', 'Tests + coverage', 'Vercel deploy'],
+      outcome: 'Full CI/CD pipeline with Jenkins on Docker and 22 test files with Vitest.',
+    },
+    {
+      ...base('gps-report-generator'),
+      kind: 'Desktop · Automation',
+      summary:
+        'Desktop app that generates the standard map image for technical field reports. From coordinates (decimal or degrees, minutes and seconds) it fetches the satellite image, address and elevation from Google Maps and returns an image ready for the PDF, with a data footer.',
+      flow: ['Coordinates (JavaFX)', 'CoordinateParser', 'Google Maps: Static, Geocoding, Elevation', 'ImageProcessingService', '640×380 image + footer'],
+      outcome:
+        'Packaged as a Windows installer (.exe) with jpackage and WiX: runs without Java installed on the user machine. The API key lives in an environment variable, outside the code.',
+    },
+    {
+      ...base('batalha'),
       kind: 'Backend · Architecture',
       status: 'Academic · S203',
       title: 'Battle System',
@@ -58,7 +81,7 @@ export const en: SiteContent = {
       outcome: 'Strategy (attacks), Factory (Pokémon creation) and Adapter (external data) patterns in an MVC/SOA architecture.',
     },
     {
-      ...restfulBooker,
+      ...base('inatel-qs-restful-booker'),
       kind: 'QA · API Testing',
       status: 'Academic · Software Quality',
       title: 'Automated tests — Restful Booker',
@@ -68,19 +91,40 @@ export const en: SiteContent = {
       outcome: '20 test cases running in CI on every push. Documented defect: DELETE on a missing ID returns 405 instead of 404.',
     },
     {
-      ...divideAi,
-      kind: 'Web · CI/CD',
-      status: 'Live · C14',
+      ...base('Projeto-BD2'),
+      kind: 'NoSQL database · CLI',
+      status: 'Academic · Databases II · 2024',
       summary:
-        'Web app for splitting group expenses: create groups, log spending, see who owes whom and settle up. Layered architecture (data, domain, presentation).',
-      flow: ['Push', 'Jenkins', 'Lint + build', 'Tests + coverage', 'Vercel deploy'],
-      outcome: 'Full CI/CD pipeline with Jenkins on Docker and 22 test files with Vitest.',
+        'Command-line personal library of games and software. Each user keeps their collection in a MongoDB document, with full CRUD and reports built from aggregation queries.',
+      flow: ['CLI (Python)', 'UsuarioDAO', 'MongoDB', 'Aggregation pipeline', 'JSON reports'],
+      outcome:
+        'Queries with $unwind, $group, $match and $sort: games by genre, software with more than one version, newest and oldest games — exported to JSON.',
+    },
+    {
+      ...base('PROJETO-POO_BD'),
+      kind: 'Backend · Relational database',
+      status: 'Academic · OOP + Databases',
+      title: 'Sales System',
+      summary:
+        'Sales system for a store in Java with MySQL: sellers, customers, products, sales operations and invoices. Modeled in MySQL Workbench, with data access through the DAO pattern.',
+      flow: ['Menu (console)', 'DAOs', 'JDBC', 'MySQL (6 tables)'],
+      outcome:
+        'Relational model with a junction table between sales and products (N:N) and create, read, update and delete operations for every entity.',
+    },
+    {
+      ...base('Aluga-Facil'),
+      kind: 'Mobile · Front-end',
+      status: 'Prototype · 2023',
+      summary:
+        'Mobile app for renting homes: welcome, login, search with categories (house, studio, apartment), property page and tenant sign-up form.',
+      flow: ['Welcome', 'Login', 'Search + categories', 'Property page', 'Tenant sign-up'],
+      outcome: 'Stack navigation with React Navigation and UI styled with NativeWind (Tailwind for React Native).',
     },
   ],
 
   areas: [
-    { title: 'Front-end', body: 'Responsive web interfaces, reusable components and tests.', keywords: 'React · Next.js · TypeScript · Vitest' },
-    { title: 'Backend & APIs', body: 'REST services, data modeling and integrations.', keywords: 'Spring Boot · FastAPI · PostgreSQL' },
+    { title: 'Front-end', body: 'Responsive web and mobile interfaces, reusable components and tests.', keywords: 'React · Next.js · React Native · TypeScript' },
+    { title: 'Backend & data', body: 'REST services, data modeling and integrations.', keywords: 'Spring Boot · FastAPI · PostgreSQL · MySQL · MongoDB' },
     { title: 'Delivery & infrastructure', body: 'Containers and continuous integration pipelines.', keywords: 'Docker · Jenkins' },
     { title: 'Requirements & clients', body: 'Requirements gathering, expectation alignment and technical support.', keywords: 'Scope · Communication' },
   ],

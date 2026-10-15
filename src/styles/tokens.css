@@ -30,8 +30,11 @@
   --color-ok-bg: #13201a;
   --color-ok-line: #2c4a3a;
 
-  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  /* Ubuntu: a fonte da distribuição Linux mais conhecida */
+  --font-sans: 'Ubuntu', system-ui, sans-serif;
+  --font-mono: 'Ubuntu Mono', ui-monospace, monospace;
+  /* A Ubuntu Mono desenha as letras menores; isto iguala a altura das minúsculas à da Ubuntu */
+  --mono-size-adjust: 0.56;
 
   --sidebar-width: 272px;
   --content-width: 1400px;

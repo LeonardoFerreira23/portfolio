@@ -75,6 +75,30 @@ const projects: Project[] = [
     repo: `${GH}/LeonardoFerreira23/construai`,
   },
   {
+    kind: 'Web · CI/CD',
+    status: 'No ar · C14',
+    title: 'DivideAi',
+    summary:
+      'Aplicação web para dividir despesas em grupo: criação de grupos, registro de gastos, quem deve para quem e acertos. Arquitetura em camadas (data, domain, presentation).',
+    flow: ['Push', 'Jenkins', 'Lint + build', 'Testes + cobertura', 'Deploy Vercel'],
+    outcome: 'Pipeline completo de CI/CD com Jenkins em Docker e 22 arquivos de teste com Vitest.',
+    stack: ['React', 'TypeScript', 'Zustand', 'Vitest', 'Jenkins'],
+    repo: `${GH}/C14-INATEL/divide-ai-front`,
+    live: 'https://divide-ai-front.vercel.app',
+  },
+  {
+    kind: 'Desktop · Automação',
+    status: 'Java · 2026',
+    title: 'GPS Report Generator',
+    summary:
+      'Aplicação desktop que gera o mapa padronizado dos relatórios técnicos de campo. A partir das coordenadas (decimais ou em graus, minutos e segundos), busca imagem de satélite, endereço e altitude no Google Maps e entrega a imagem pronta para o PDF, com rodapé de dados.',
+    flow: ['Coordenadas (JavaFX)', 'CoordinateParser', 'Google Maps: Static, Geocoding, Elevation', 'ImageProcessingService', 'Imagem 640×380 + rodapé'],
+    outcome:
+      'Empacotado como instalador Windows (.exe) com jpackage e WiX: roda sem Java instalado na máquina de quem usa. A chave da API fica em variável de ambiente, fora do código.',
+    stack: ['Java 17', 'Spring Boot', 'JavaFX', 'Maven', 'jpackage'],
+    repo: `${GH}/LeonardoFerreira23/gps-report-generator`,
+  },
+  {
     kind: 'Backend · Arquitetura',
     status: 'Acadêmico · S203',
     title: 'Sistema de Batalha',
@@ -97,22 +121,45 @@ const projects: Project[] = [
     repo: `${GH}/LeonardoFerreira23/inatel-qs-restful-booker`,
   },
   {
-    kind: 'Web · CI/CD',
-    status: 'No ar · C14',
-    title: 'DivideAi',
+    kind: 'Banco NoSQL · CLI',
+    status: 'Acadêmico · BD2 · 2024',
+    title: 'MigaoVault',
     summary:
-      'Aplicação web para dividir despesas em grupo: criação de grupos, registro de gastos, quem deve para quem e acertos. Arquitetura em camadas (data, domain, presentation).',
-    flow: ['Push', 'Jenkins', 'Lint + build', 'Testes + cobertura', 'Deploy Vercel'],
-    outcome: 'Pipeline completo de CI/CD com Jenkins em Docker e 22 arquivos de teste com Vitest.',
-    stack: ['React', 'TypeScript', 'Zustand', 'Vitest', 'Jenkins'],
-    repo: `${GH}/C14-INATEL/divide-ai-front`,
-    live: 'https://divide-ai-front.vercel.app',
+      'Biblioteca pessoal de jogos e softwares, em linha de comando. Cada usuário guarda a própria coleção em um documento MongoDB, com CRUD completo e relatórios gerados por consultas de agregação.',
+    flow: ['CLI (Python)', 'UsuarioDAO', 'MongoDB', 'Aggregation pipeline', 'Relatórios em JSON'],
+    outcome:
+      'Consultas com $unwind, $group, $match e $sort: jogos por gênero, softwares com mais de uma versão, jogos mais recentes e mais antigos — exportadas para JSON.',
+    stack: ['Python', 'MongoDB', 'PyMongo'],
+    repo: `${GH}/LeonardoFerreira23/Projeto-BD2`,
+  },
+  {
+    kind: 'Backend · Banco relacional',
+    status: 'Acadêmico · POO + BD',
+    title: 'Sistema de Vendas',
+    summary:
+      'Sistema de vendas de uma loja em Java com MySQL: vendedores, clientes, produtos, operações de venda e notas fiscais. Modelagem no MySQL Workbench e acesso a dados pelo padrão DAO.',
+    flow: ['Menu (console)', 'DAOs', 'JDBC', 'MySQL (6 tabelas)'],
+    outcome:
+      'Modelo relacional com tabela associativa entre vendas e produtos (N:N) e operações de inserção, consulta, atualização e exclusão para cada entidade.',
+    stack: ['Java', 'MySQL', 'JDBC', 'Maven'],
+    repo: `${GH}/LeonardoFerreira23/PROJETO-POO_BD`,
+  },
+  {
+    kind: 'Mobile · Front-end',
+    status: 'Protótipo · 2023',
+    title: 'Aluga Fácil',
+    summary:
+      'App mobile de aluguel de imóveis: boas-vindas, login, busca com categorias (casa, kitnet, apartamento), página do imóvel e formulário de cadastro do inquilino.',
+    flow: ['Boas-vindas', 'Login', 'Busca + categorias', 'Página do imóvel', 'Cadastro do inquilino'],
+    outcome: 'Navegação em pilha com React Navigation e interface estilizada com NativeWind (Tailwind para React Native).',
+    stack: ['React Native', 'JavaScript', 'NativeWind', 'React Navigation'],
+    repo: `${GH}/LeonardoFerreira23/Aluga-Facil`,
   },
 ]
 
 const areas: Area[] = [
-  { title: 'Front-end', body: 'Interfaces web responsivas, componentes reutilizáveis e testes.', keywords: 'React · Next.js · TypeScript · Vitest' },
-  { title: 'Backend e APIs', body: 'Serviços REST, modelagem de dados e integração.', keywords: 'Spring Boot · FastAPI · PostgreSQL' },
+  { title: 'Front-end', body: 'Interfaces web e mobile responsivas, componentes reutilizáveis e testes.', keywords: 'React · Next.js · React Native · TypeScript' },
+  { title: 'Backend e dados', body: 'Serviços REST, modelagem de dados e integrações.', keywords: 'Spring Boot · FastAPI · PostgreSQL · MySQL · MongoDB' },
   { title: 'Entrega e infraestrutura', body: 'Containers e pipelines de integração contínua.', keywords: 'Docker · Jenkins' },
   { title: 'Requisitos e cliente', body: 'Levantamento, alinhamento de expectativas e suporte técnico.', keywords: 'Escopo · Comunicação' },
 ]

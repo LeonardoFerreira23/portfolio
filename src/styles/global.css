@@ -62,6 +62,7 @@ button {
 
 .mono {
   font-family: var(--font-mono);
+  font-size-adjust: var(--mono-size-adjust);
 }
 
 .chip {
@@ -71,6 +72,7 @@ button {
   border: 1px solid var(--color-line-mid);
   background: var(--color-surface);
   font-family: var(--font-mono);
+  font-size-adjust: var(--mono-size-adjust);
   font-size: 12px;
   color: var(--color-text-soft);
 }
@@ -79,6 +81,7 @@ button {
   padding: 2px 8px;
   background: var(--color-surface-2);
   font-family: var(--font-mono);
+  font-size-adjust: var(--mono-size-adjust);
   font-size: 12px;
   color: var(--color-text-muted);
 }
@@ -171,6 +174,7 @@ button {
 
 .section__index {
   font-family: var(--font-mono);
+  font-size-adjust: var(--mono-size-adjust);
   font-size: 13px;
   color: var(--color-text-muted);
 }

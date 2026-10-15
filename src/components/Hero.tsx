@@ -31,8 +31,8 @@ export function Hero() {
           <Link to="/projetos" className="btn btn--primary">
             {ui.hero.ctaProjects}
           </Link>
-          <Link to="/contato" className="btn btn--ghost">
-            {ui.hero.ctaContact}
+          <Link to="/curriculo" className="btn btn--ghost">
+            {ui.hero.ctaResume}
           </Link>
         </div>
       </div>

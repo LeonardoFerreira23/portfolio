@@ -18,7 +18,12 @@ export function ContactList() {
         <div key={l.label} style={{ display: 'contents' }}>
           <dt style={{ padding: '18px 0', borderBottom: '1px solid var(--color-line)', color: 'var(--color-text-muted)' }}>{l.label}</dt>
           <dd style={{ padding: '18px 0', borderBottom: '1px solid var(--color-line)', overflowWrap: 'anywhere' }}>
-            <a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
+            <a
+              href={l.href}
+              target={l.href.startsWith('http') ? '_blank' : undefined}
+              rel="noreferrer"
+              download={l.href.endsWith('.pdf') ? 'Curriculo-Leonardo-Ferreira.pdf' : undefined}
+            >
               {l.text}
             </a>
           </dd>

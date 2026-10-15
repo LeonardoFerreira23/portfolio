@@ -1,0 +1,100 @@
+/* Botão de download + fatos rápidos, logo abaixo do resumo */
+.resume-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: -16px;
+  padding-bottom: 48px;
+}
+
+.resume-download {
+  gap: 10px;
+}
+
+.resume-download__hint {
+  padding-left: 10px;
+  border-left: 1px solid rgba(6, 16, 36, 0.3);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.resume-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+}
+
+.resume-facts__item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-mid);
+  font-size: 13px;
+}
+
+.resume-facts__item dt {
+  color: var(--color-text-muted);
+}
+
+.resume-facts__item dd {
+  margin: 0;
+  color: var(--color-text);
+}
+
+/* Competências: 4 grupos lado a lado */
+.skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 16px;
+}
+
+.skills__group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+}
+
+.skills__title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.skills__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skills__list .tag {
+  color: var(--color-text-soft);
+}
+
+/* Chamada final */
+.resume-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.resume-cta__text {
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 500;
+}
+
+.resume-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}

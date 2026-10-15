@@ -1,6 +1,6 @@
 // Site content in ENGLISH. Mirrors content.ts (Portuguese) — keep both in sync.
 // Fields that don't change between languages (links, stack, name) are reused from the Portuguese version.
-import { pt, type SiteContent } from './content'
+import { pt, CV_FILE, type SiteContent } from './content'
 
 /** Busca o projeto em português pelo nome do repositório (a ordem da lista pode mudar). */
 const base = (repoName: string) => {
@@ -22,12 +22,12 @@ export const en: SiteContent = {
       'shipping from database to UI',
     ],
     statement:
-      'Full stack developer with 7 years of industry experience. I build products end to end — React and TypeScript interfaces, Java and Python APIs, databases and automated delivery.',
+      'Full stack developer with 7 years in a technical role, where I designed and built two internal systems on my own. I work on both ends: React and TypeScript interfaces, Java and Python APIs, and databases.',
     facts: [
       { label: 'focus', value: 'Full stack · Web & APIs' },
       { label: 'front', value: 'React, Next.js, TypeScript' },
       { label: 'back', value: 'Java, Python, PostgreSQL' },
-      { label: 'experience', value: '7 years in the industry' },
+      { label: 'experience', value: '7 years in technical roles' },
       { label: 'education', value: 'Software Eng. · Inatel (2027)' },
       { label: 'languages', value: 'Portuguese, advanced English' },
       { label: 'location', value: 'Santa Rita do Sapucaí, Brazil' },
@@ -39,10 +39,10 @@ export const en: SiteContent = {
       ...base('bhv-transfer'),
       kind: 'Backend · Production',
       summary:
-        'API that centralizes the intake of technical inspection packages. Technicians pick the site and owner from menus, drop the package (.zip/.rar), and the system organizes the files on the server and returns a download link.',
-      flow: ['Technician (Dropzone)', 'POST /api/uploads', 'UploadService', 'Storage + PostgreSQL', 'Download link'],
+        'API that centralizes the intake of technical inspection packages. Technicians pick the site and owner from menus and drop the file (.zip/.rar); it uploads in 10 MB chunks, and the server reassembles and organizes the files and returns a download link.',
+      flow: ['Dropzone (10 MB chunks)', 'POST /api/uploads', 'UploadService reassembles chunks', 'Storage + PostgreSQL', 'Download link'],
       outcome:
-        'No more manual typing of identifiers, plus automatic organization per technician. Upload and link-generation logic covered by tests with JUnit 5 and Mockito.',
+        'Uploads of files over 1 GB, with up to 3 retries per chunk if the connection drops. No more manual typing of identifiers; upload and link-generation logic covered by tests with JUnit 5 and Mockito.',
     },
     {
       ...base('construai'),
@@ -122,22 +122,67 @@ export const en: SiteContent = {
     },
   ],
 
-  areas: [
-    { title: 'Front-end', body: 'Responsive web and mobile interfaces, reusable components and tests.', keywords: 'React · Next.js · React Native · TypeScript' },
-    { title: 'Backend & data', body: 'REST services, data modeling and integrations.', keywords: 'Spring Boot · FastAPI · PostgreSQL · MySQL · MongoDB' },
-    { title: 'Delivery & infrastructure', body: 'Containers and continuous integration pipelines.', keywords: 'Docker · Jenkins' },
-    { title: 'Requirements & clients', body: 'Requirements gathering, expectation alignment and technical support.', keywords: 'Scope · Communication' },
-  ],
-
-  timeline: [
-    {
-      period: '2019 — 2026',
-      title: 'Analyst · Behive Tecnologia',
-      body: 'Requirements gathering with clients, expectation alignment and software development.',
-    },
-    { period: 'until Dec 2027', title: 'Software Engineering · Inatel', body: 'Final year of the degree.' },
-    { period: 'completed', title: 'Electronics Technician · ETE FMC', body: 'Focus on Industrial Automation.' },
-  ],
+  resume: {
+    cv: pt.resume.cv,
+    summary:
+      'Seven years in a technical role, where I designed and built two internal systems on my own to remove operational bottlenecks. I study Software Engineering at Inatel and work on both ends: React and TypeScript interfaces, and Java and Python services, with relational data modeling and REST API integration. My edge is spotting the process bottleneck before writing the first line of code.',
+    facts: [
+      { label: 'availability', value: 'immediate' },
+      { label: 'work mode', value: 'remote, or on-site in southern Minas Gerais' },
+      { label: 'languages', value: 'Portuguese · advanced English' },
+    ],
+    skills: [
+      { title: 'Front-end', items: ['React', 'TypeScript', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'Vite', 'Consuming REST APIs'] },
+      { title: 'Back-end', items: ['Java · Spring Boot', 'Python · FastAPI', 'REST APIs', 'Layered architecture', 'Object-oriented programming'] },
+      { title: 'Data', items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Relational modeling', 'SQL queries'] },
+      { title: 'Tools & practices', items: ['Git · GitHub', 'Docker', 'Vercel', 'Automated and manual testing', 'Scrum · Kanban', 'CI/CD'] },
+    ],
+    experience: [
+      {
+        period: 'Jan 2019 — Aug 2026',
+        title: 'Analyst & Internal Solutions Developer',
+        subtitle: 'Behive Tecnologia · Santa Rita do Sapucaí, Brazil',
+        bullets: [
+          {
+            label: 'Development',
+            text: 'designed and built two internal systems (BHV Transfer and GPS Report Generator) on my own, from understanding the problem to delivering the solution.',
+          },
+          {
+            label: 'Requirements',
+            text: 'worked directly with clients and operations to understand needs, align expectations and turn business rules into technical solutions.',
+          },
+          {
+            label: 'Quality & data',
+            text: 'technical validation of operational reports, compliance with internal standards and data structuring for submission to external systems.',
+          },
+        ],
+      },
+    ],
+    education: [
+      {
+        period: 'until Dec 2027',
+        title: 'Software Engineering',
+        subtitle: 'Inatel — National Institute of Telecommunications · in progress',
+      },
+      {
+        period: 'completed',
+        title: 'Electronics Technician · Industrial Automation',
+        subtitle: 'ETE FMC — Technical School of Electronics',
+      },
+    ],
+    awards: [
+      {
+        period: '2025',
+        title: '1st place — Construtech Hackathon',
+        body: 'AI-based solution for process optimization, built as a team.',
+      },
+      {
+        period: '2024',
+        title: '1st place — Construtech Hackathon',
+        body: 'Project combining hardware and software to solve a complex industry problem.',
+      },
+    ],
+  },
 
   achievement: {
     highlight: '2×',
@@ -147,21 +192,23 @@ export const en: SiteContent = {
 
   contact: {
     title: "Let's talk.",
-    body: 'Open to full stack roles. Happy to chat in English or Portuguese.',
-    links: pt.contact.links,
+    body: 'Open to full stack, back-end and front-end roles — remote, or on-site in southern Minas Gerais, Brazil. Happy to chat in English or Portuguese.',
+    links: pt.contact.links.map((l) =>
+      l.href === CV_FILE ? { ...l, label: 'résumé', text: 'download PDF (in Portuguese)' } : l,
+    ),
   },
 
   pages: [
     { path: '/', label: 'Home', index: '01' },
     { path: '/projetos', label: 'Projects', index: '02' },
-    { path: '/experiencia', label: 'Experience', index: '03' },
+    { path: '/curriculo', label: 'Résumé', index: '03' },
     { path: '/contato', label: 'Contact', index: '04' },
   ],
 
   ui: {
     locale: 'en-GB',
     metaDescription:
-      'Leonardo Ferreira — Full Stack Developer with 7 years of industry experience. React, TypeScript, Java, Python and PostgreSQL.',
+      'Leonardo Ferreira — Full Stack Developer. 7 years in technical roles; React, TypeScript, Java, Python and PostgreSQL.',
     skipLink: 'Skip to content',
     nav: {
       pagesLabel: 'Pages',
@@ -175,7 +222,7 @@ export const en: SiteContent = {
     hero: {
       stackLabel: 'Main stack',
       ctaProjects: 'View case studies',
-      ctaContact: 'Résumé / Contact',
+      ctaResume: 'View résumé',
     },
     panel: {
       label: 'Profile summary',
@@ -202,12 +249,23 @@ export const en: SiteContent = {
       title: 'Case studies',
       lede: 'Each project shows the problem, how the solution flows and what was delivered.',
     },
-    experiencePage: {
-      index: '03 / journey',
-      title: 'Experience & education',
-      lede: '7 years of industry experience, from gathering requirements with clients to code in production.',
-      areasIndex: 'areas',
-      areasTitle: 'What I work on',
+    resumePage: {
+      index: '03 / résumé',
+      title: 'Résumé',
+      factsLabel: 'At a glance',
+      download: 'Download CV',
+      downloadHint: 'PDF · in Portuguese',
+      skillsIndex: 'skills',
+      skillsTitle: 'Technical skills',
+      experienceIndex: 'experience',
+      experienceTitle: 'Work experience',
+      educationIndex: 'education',
+      educationTitle: 'Education',
+      awardsIndex: 'awards',
+      awardsTitle: 'Awards',
+      ctaText: 'Want to talk about a role?',
+      ctaContact: 'Get in touch',
+      ctaProjects: 'See projects',
     },
     contactPage: {
       index: '04 / contact',

@@ -14,8 +14,14 @@ export type Project = {
   live?: string
 }
 
-export type Area = { title: string; body: string; keywords: string }
-export type TimelineItem = { period: string; title: string; body: string }
+/** Item de linha do tempo (experiência, formação, premiações). */
+export type TimelineItem = {
+  period: string
+  title: string
+  subtitle?: string
+  body?: string
+  bullets?: { label?: string; text: string }[]
+}
 export type ContactLink = { label: string; text: string; href: string }
 
 const profile = {
@@ -33,7 +39,7 @@ const profile = {
     'entrego do banco à interface',
   ],
   statement:
-    'Desenvolvedor full stack com 7 anos de experiência no mercado. Construo produtos de ponta a ponta — interfaces em React e TypeScript, APIs em Java e Python, banco de dados e entrega automatizada.',
+    'Desenvolvedor full stack com 7 anos de atuação na área técnica, onde idealizei e desenvolvi sozinho dois sistemas internos. Trabalho nas duas pontas: interfaces em React e TypeScript, APIs em Java e Python e banco de dados.',
   chips: ['React · TypeScript', 'Next.js', 'Java · Spring Boot', 'Python · FastAPI', 'PostgreSQL', 'Docker · CI/CD'],
   /** Painel ao lado do hero (perfil.ts). A hora local é calculada ao vivo pelo componente. */
   timeZone: 'America/Sao_Paulo',
@@ -41,7 +47,7 @@ const profile = {
     { label: 'foco', value: 'Full stack · Web e APIs' },
     { label: 'front', value: 'React, Next.js, TypeScript' },
     { label: 'back', value: 'Java, Python, PostgreSQL' },
-    { label: 'experiência', value: '7 anos no mercado' },
+    { label: 'experiência', value: '7 anos na área técnica' },
     { label: 'formação', value: 'Eng. de Software · Inatel (2027)' },
     { label: 'idiomas', value: 'Português, Inglês avançado' },
     { label: 'local', value: 'Santa Rita do Sapucaí, MG' },
@@ -50,16 +56,19 @@ const profile = {
 
 export const GH = 'https://github.com'
 
+/** Currículo em PDF (fica em public/). */
+export const CV_FILE = '/curriculo-leonardo-ferreira.pdf'
+
 const projects: Project[] = [
   {
     kind: 'Backend · Produção',
     status: 'Behive Tecnologia · v1.2',
     title: 'BHV Transfer',
     summary:
-      'API para centralizar o recebimento de vistorias técnicas. O técnico escolhe site e responsável em menus, arrasta o pacote (.zip/.rar) e o sistema organiza os arquivos no servidor e devolve um link de download.',
-    flow: ['Técnico (Dropzone)', 'POST /api/uploads', 'UploadService', 'Storage + PostgreSQL', 'Link de download'],
+      'API que centraliza o recebimento de pacotes de vistoria técnica. O técnico escolhe site e responsável em menus e arrasta o arquivo (.zip/.rar); o envio é feito em blocos de 10 MB, o servidor remonta e organiza os arquivos e devolve um link de download.',
+    flow: ['Dropzone (blocos de 10 MB)', 'POST /api/uploads', 'UploadService remonta os blocos', 'Storage + PostgreSQL', 'Link de download'],
     outcome:
-      'Fim da digitação manual de identificadores e organização automática por técnico. Lógica de upload e geração de links coberta por testes com JUnit 5 e Mockito.',
+      'Envio de arquivos acima de 1 GB, com até 3 novas tentativas por bloco se a conexão falhar. Fim da digitação manual de identificadores; lógica de upload e geração de links coberta por testes com JUnit 5 e Mockito.',
     stack: ['Java 21', 'Spring Boot 3', 'Spring Data JPA', 'PostgreSQL', 'Docker'],
     repo: `${GH}/LeonardoFerreira23/bhv-transfer`,
   },
@@ -157,22 +166,69 @@ const projects: Project[] = [
   },
 ]
 
-const areas: Area[] = [
-  { title: 'Front-end', body: 'Interfaces web e mobile responsivas, componentes reutilizáveis e testes.', keywords: 'React · Next.js · React Native · TypeScript' },
-  { title: 'Backend e dados', body: 'Serviços REST, modelagem de dados e integrações.', keywords: 'Spring Boot · FastAPI · PostgreSQL · MySQL · MongoDB' },
-  { title: 'Entrega e infraestrutura', body: 'Containers e pipelines de integração contínua.', keywords: 'Docker · Jenkins' },
-  { title: 'Requisitos e cliente', body: 'Levantamento, alinhamento de expectativas e suporte técnico.', keywords: 'Escopo · Comunicação' },
-]
-
-const timeline: TimelineItem[] = [
-  {
-    period: '2019 — 2026',
-    title: 'Analista · Behive Tecnologia',
-    body: 'Levantamento de requisitos com clientes, alinhamento de expectativas e desenvolvimento de software.',
-  },
-  { period: 'até dez 2027', title: 'Engenharia de Software · Inatel', body: 'Último ano da graduação.' },
-  { period: 'concluído', title: 'Técnico em Eletrônica · ETE FMC', body: 'Ênfase em Automação Industrial.' },
-]
+/** Aba "Currículo": resumo do CV. O telefone fica de fora de propósito (site é público). */
+const resume = {
+  /** PDF em public/. Ao atualizar o CV, substitua o arquivo mantendo o mesmo nome. */
+  cv: { href: CV_FILE, downloadName: 'Curriculo-Leonardo-Ferreira.pdf' },
+  summary:
+    'Sete anos de atuação na área técnica, em que idealizei e desenvolvi sozinho dois sistemas internos para resolver gargalos da operação. Curso Engenharia de Software no Inatel e trabalho nas duas pontas: interfaces em React e TypeScript e serviços em Java e Python, com modelagem de banco relacional e integração via API REST. Meu diferencial é enxergar o gargalo do processo antes de escrever a primeira linha de código.',
+  facts: [
+    { label: 'disponibilidade', value: 'imediata' },
+    { label: 'modalidade', value: 'remoto ou presencial · Sul de Minas' },
+    { label: 'idiomas', value: 'português · inglês avançado' },
+  ],
+  skills: [
+    { title: 'Front-end', items: ['React', 'TypeScript', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'Vite', 'Consumo de APIs REST'] },
+    { title: 'Back-end', items: ['Java · Spring Boot', 'Python · FastAPI', 'APIs REST', 'Arquitetura em camadas', 'Orientação a objetos'] },
+    { title: 'Dados', items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Modelagem relacional', 'Consultas SQL'] },
+    { title: 'Ferramentas e práticas', items: ['Git · GitHub', 'Docker', 'Vercel', 'Testes automatizados e manuais', 'Scrum · Kanban', 'CI/CD'] },
+  ],
+  experience: [
+    {
+      period: 'jan 2019 — ago 2026',
+      title: 'Analista & Desenvolvedor de Soluções Internas',
+      subtitle: 'Behive Tecnologia · Santa Rita do Sapucaí, MG',
+      bullets: [
+        {
+          label: 'Desenvolvimento',
+          text: 'idealizei e desenvolvi dois sistemas internos (BHV Transfer e GPS Report Generator), atuando sozinho do levantamento do problema à entrega da solução.',
+        },
+        {
+          label: 'Levantamento de requisitos',
+          text: 'interlocução direta com clientes e com a operação para entender a necessidade, alinhar expectativas e traduzir regra de negócio em solução técnica.',
+        },
+        {
+          label: 'Qualidade e dados',
+          text: 'validação técnica de relatórios operacionais, conformidade com padrões internos e estruturação de dados para envio a sistemas externos.',
+        },
+      ],
+    },
+  ] satisfies TimelineItem[],
+  education: [
+    {
+      period: 'até dez 2027',
+      title: 'Engenharia de Software',
+      subtitle: 'Inatel — Instituto Nacional de Telecomunicações · cursando',
+    },
+    {
+      period: 'concluído',
+      title: 'Técnico em Eletrônica · Automação Industrial',
+      subtitle: 'ETE FMC — Escola Técnica de Eletrônica',
+    },
+  ] satisfies TimelineItem[],
+  awards: [
+    {
+      period: '2025',
+      title: '1º lugar — Hackathon Construtech',
+      body: 'Solução com inteligência artificial para otimização de processos, desenvolvida em equipe.',
+    },
+    {
+      period: '2024',
+      title: '1º lugar — Hackathon Construtech',
+      body: 'Projeto integrando hardware e software para resolver um problema complexo do setor.',
+    },
+  ] satisfies TimelineItem[],
+}
 
 const achievement = {
   highlight: '2×',
@@ -182,13 +238,12 @@ const achievement = {
 
 const contact = {
   title: 'Vamos conversar.',
-  body: 'Aberto a vagas full stack. Respondo em português ou inglês.',
+  body: 'Aberto a vagas full stack, back-end e front-end — remoto ou presencial no Sul de Minas. Respondo em português ou inglês.',
   links: [
     { label: 'e-mail', text: 'leonardo.fer201@gmail.com', href: 'mailto:leonardo.fer201@gmail.com' },
     { label: 'github', text: 'github.com/LeonardoFerreira23', href: 'https://github.com/LeonardoFerreira23' },
     { label: 'linkedin', text: 'linkedin.com/in/leonardo-ferreira-43925b277', href: 'https://www.linkedin.com/in/leonardo-ferreira-43925b277/' },
-    // Quando tiver o PDF em public/curriculo.pdf, descomente:
-    // { label: 'currículo', text: 'baixar PDF', href: '/curriculo.pdf' },
+    { label: 'currículo', text: 'baixar PDF', href: CV_FILE },
   ] satisfies ContactLink[],
 }
 
@@ -196,7 +251,7 @@ const contact = {
 const pages = [
   { path: '/', label: 'Início', index: '01' },
   { path: '/projetos', label: 'Projetos', index: '02' },
-  { path: '/experiencia', label: 'Experiência', index: '03' },
+  { path: '/curriculo', label: 'Currículo', index: '03' },
   { path: '/contato', label: 'Contato', index: '04' },
 ]
 
@@ -204,7 +259,7 @@ const pages = [
 const ui = {
   locale: 'pt-BR',
   metaDescription:
-    'Leonardo Ferreira — Desenvolvedor Full Stack com 7 anos de experiência no mercado. React, TypeScript, Java, Python e PostgreSQL.',
+    'Leonardo Ferreira — Desenvolvedor Full Stack. 7 anos de atuação na área técnica; React, TypeScript, Java, Python e PostgreSQL.',
   skipLink: 'Pular para o conteúdo',
   nav: {
     pagesLabel: 'Páginas',
@@ -218,7 +273,7 @@ const ui = {
   hero: {
     stackLabel: 'Stack principal',
     ctaProjects: 'Ver estudos de caso',
-    ctaContact: 'Currículo / Contato',
+    ctaResume: 'Ver currículo',
   },
   panel: {
     label: 'Resumo do perfil',
@@ -245,12 +300,23 @@ const ui = {
     title: 'Estudos de caso',
     lede: 'Cada projeto mostra o problema, o fluxo da solução e o que foi entregue.',
   },
-  experiencePage: {
-    index: '03 / trajetória',
-    title: 'Experiência e formação',
-    lede: '7 anos de experiência no mercado, do levantamento de requisitos com o cliente ao código em produção.',
-    areasIndex: 'áreas',
-    areasTitle: 'Onde eu atuo',
+  resumePage: {
+    index: '03 / currículo',
+    title: 'Currículo',
+    factsLabel: 'Resumo rápido',
+    download: 'Baixar CV',
+    downloadHint: 'PDF · 1 página',
+    skillsIndex: 'competências',
+    skillsTitle: 'Competências técnicas',
+    experienceIndex: 'experiência',
+    experienceTitle: 'Experiência profissional',
+    educationIndex: 'formação',
+    educationTitle: 'Formação',
+    awardsIndex: 'premiações',
+    awardsTitle: 'Premiações',
+    ctaText: 'Quer conversar sobre uma vaga?',
+    ctaContact: 'Entrar em contato',
+    ctaProjects: 'Ver projetos',
   },
   contactPage: {
     index: '04 / contato',
@@ -274,7 +340,7 @@ const ui = {
   },
 }
 
-export const pt = { profile, projects, areas, timeline, achievement, contact, pages, ui }
+export const pt = { profile, projects, resume, achievement, contact, pages, ui }
 
 /** Formato que as duas versões (pt e en) precisam seguir. */
 export type SiteContent = typeof pt

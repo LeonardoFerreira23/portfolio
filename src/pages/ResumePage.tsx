@@ -25,6 +25,9 @@ export function ResumePage() {
           {t.download}
           <span className="resume-download__hint mono">{t.downloadHint}</span>
         </a>
+        <a href={resume.cv.alt.href} download={resume.cv.alt.downloadName} lang={resume.cv.alt.lang} className="resume-alt mono">
+          {resume.cv.alt.label}
+        </a>
         <dl className="resume-facts mono" aria-label={t.factsLabel}>
           {resume.facts.map((f) => (
             <div key={f.label} className="resume-facts__item">

@@ -1,6 +1,6 @@
 // Site content in ENGLISH. Mirrors content.ts (Portuguese) — keep both in sync.
 // Fields that don't change between languages (links, stack, name) are reused from the Portuguese version.
-import { pt, CV_FILE, type SiteContent } from './content'
+import { pt, CV_FILE, CV_FILE_EN, type SiteContent } from './content'
 
 /** Busca o projeto em português pelo nome do repositório (a ordem da lista pode mudar). */
 const base = (repoName: string) => {
@@ -123,7 +123,11 @@ export const en: SiteContent = {
   ],
 
   resume: {
-    cv: pt.resume.cv,
+    cv: {
+      href: CV_FILE_EN,
+      downloadName: 'CV-Leonardo-Ferreira-EN.pdf',
+      alt: { href: CV_FILE, downloadName: 'Curriculo-Leonardo-Ferreira.pdf', label: 'Versão em português (PDF)', lang: 'pt-BR' },
+    },
     summary:
       'Seven years in a technical role, where I designed and built two internal systems on my own to remove operational bottlenecks. I study Software Engineering at Inatel and work on both ends: React and TypeScript interfaces, and Java and Python services, with relational data modeling and REST API integration. My edge is spotting the process bottleneck before writing the first line of code.',
     facts: [
@@ -194,7 +198,7 @@ export const en: SiteContent = {
     title: "Let's talk.",
     body: 'Open to full stack, back-end and front-end roles — remote, or on-site in southern Minas Gerais, Brazil. Happy to chat in English or Portuguese.',
     links: pt.contact.links.map((l) =>
-      l.href === CV_FILE ? { ...l, label: 'résumé', text: 'download PDF (in Portuguese)' } : l,
+      l.href === CV_FILE ? { label: 'résumé', text: 'download PDF', href: CV_FILE_EN } : l,
     ),
   },
 
@@ -254,7 +258,7 @@ export const en: SiteContent = {
       title: 'Résumé',
       factsLabel: 'At a glance',
       download: 'Download CV',
-      downloadHint: 'PDF · in Portuguese',
+      downloadHint: 'PDF · 1 page',
       skillsIndex: 'skills',
       skillsTitle: 'Technical skills',
       experienceIndex: 'experience',

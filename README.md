@@ -56,7 +56,7 @@ Ao adicionar ou mudar algo (ex.: um projeto novo), faça nos dois arquivos. Em `
 
 Fica em `resume`, dentro de `content.ts` (e `content.en.ts`): resumo, fatos rápidos, competências, experiência, formação e premiações. O telefone ficou de fora de propósito, porque o site é público.
 
-**CV em PDF:** fica em `public/curriculo-leonardo-ferreira.pdf`. Para atualizar, exporte o Word como PDF e substitua o arquivo **com o mesmo nome**. Os botões de download continuam funcionando sem mexer no código.
+**CV em PDF:** português em `public/curriculo-leonardo-ferreira.pdf` e inglês em `public/cv-leonardo-ferreira-en.pdf`. Cada idioma do site baixa a sua versão e mostra um link para a outra. Para atualizar, exporte o Word como PDF e substitua o arquivo **com o mesmo nome**; não precisa mexer no código.
 
 ## Escrevendo os estudos de caso
 

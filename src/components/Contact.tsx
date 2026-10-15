@@ -1,7 +1,7 @@
 import { useContent } from '../i18n/language'
 
 export function ContactList() {
-  const { contact } = useContent()
+  const { contact, resume } = useContent()
   return (
     <dl
       className="mono"
@@ -22,7 +22,7 @@ export function ContactList() {
               href={l.href}
               target={l.href.startsWith('http') ? '_blank' : undefined}
               rel="noreferrer"
-              download={l.href.endsWith('.pdf') ? 'Curriculo-Leonardo-Ferreira.pdf' : undefined}
+              download={l.href === resume.cv.href ? resume.cv.downloadName : undefined}
             >
               {l.text}
             </a>

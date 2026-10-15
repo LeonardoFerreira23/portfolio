@@ -56,8 +56,9 @@ const profile = {
 
 export const GH = 'https://github.com'
 
-/** Currículo em PDF (fica em public/). */
+/** Currículos em PDF (ficam em public/). */
 export const CV_FILE = '/curriculo-leonardo-ferreira.pdf'
+export const CV_FILE_EN = '/cv-leonardo-ferreira-en.pdf'
 
 const projects: Project[] = [
   {
@@ -169,7 +170,12 @@ const projects: Project[] = [
 /** Aba "Currículo": resumo do CV. O telefone fica de fora de propósito (site é público). */
 const resume = {
   /** PDF em public/. Ao atualizar o CV, substitua o arquivo mantendo o mesmo nome. */
-  cv: { href: CV_FILE, downloadName: 'Curriculo-Leonardo-Ferreira.pdf' },
+  cv: {
+    href: CV_FILE,
+    downloadName: 'Curriculo-Leonardo-Ferreira.pdf',
+    /** Link discreto para a versão no outro idioma */
+    alt: { href: CV_FILE_EN, downloadName: 'CV-Leonardo-Ferreira-EN.pdf', label: 'English version (PDF)', lang: 'en' },
+  },
   summary:
     'Sete anos de atuação na área técnica, em que idealizei e desenvolvi sozinho dois sistemas internos para resolver gargalos da operação. Curso Engenharia de Software no Inatel e trabalho nas duas pontas: interfaces em React e TypeScript e serviços em Java e Python, com modelagem de banco relacional e integração via API REST. Meu diferencial é enxergar o gargalo do processo antes de escrever a primeira linha de código.',
   facts: [

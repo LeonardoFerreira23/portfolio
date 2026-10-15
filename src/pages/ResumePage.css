@@ -19,6 +19,15 @@
   font-weight: 400;
 }
 
+.resume-alt {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .resume-facts {
   display: flex;
   flex-wrap: wrap;
